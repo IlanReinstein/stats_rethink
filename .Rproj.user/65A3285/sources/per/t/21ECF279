@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1562702619048.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2834937911",
+    "id" : "21ECF279",
+    "lastKnownWriteTime" : 1563308568,
+    "last_content_update" : 1563308568854,
+    "path" : "~/Documents/stats_rethink/ch4-notes.R",
+    "project_path" : "ch4-notes.R",
+    "properties" : {
+        "cursorPosition" : "208,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
