@@ -17,4 +17,4 @@ m6.2 <- lm(brain ~ mass + I(mass^2), data=d)
 
 # Deviances
 # compute deviance by cheating
-(-2)**logLik(m6.1)
+(-2)*logLik(m6.1)
