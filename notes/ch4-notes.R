@@ -1,9 +1,14 @@
+# 4.1.1 Normal by addition
+pos <- replicate(1000, sum(runif(16, -1, 1)))
+hist(pos)
+plot(density(pos))
 # 4.1.2 Normal by multiplication
+prod(1 + runif(12, 0, 0.1))
 
 growth <- replicate(10000, prod(1 + runif(12, 0, 0.1)))
 dens(growth, norm.comp = T)
 
-#Large fluctuations in multiplicative effects will not produce Gaussian distributions
+# Large fluctuations in multiplicative effects will not produce Gaussian distributions
 big <- replicate(10000, prod(1 + runif(12, 0, 0.5)))
 dens(big, norm.comp = T)
 
@@ -19,9 +24,13 @@ dens(log.big, norm.comp = T)
 ### 4.3 A Gaussian Model for Height
 
 library(rethinking)
-
 data("Howell1")
 d <- Howell1
+
+str(d)
+precis(d)
+d$height
+
 
 d2 <- d[d$age >= 18, ]
 dens(d2$height)
@@ -31,14 +40,16 @@ curve(dunif(x, 0, 50), from = -10, to = 60)
 
 
 # Prior Sampling
-sample_mu <- rnorm(1e4, 178, 20)
+sample_mu <- rnorm(1e4, 178, 100)
 sample_sigma <- runif(1e4, 0, 50)
 prior_h <- rnorm(1e4, sample_mu, sample_sigma)
 dens(prior_h)
 
+
+
 # 4.3.3 Grid approximation, height model
 
-mu.list <- seq( from=140, to=160 , length.out=200 )
+mu.list <- seq( from=150, to=160 , length.out=100 )
 sigma.list <- seq( from=4 , to=9 , length.out=200 )
 post <- expand.grid( mu=mu.list , sigma=sigma.list )
 post$LL <- sapply( 1:nrow(post) , function(i) sum( dnorm(

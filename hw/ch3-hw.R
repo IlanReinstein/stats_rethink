@@ -8,20 +8,23 @@ posterior <- posterior/sum(posterior)
 set.seed(100)
 samples <- sample(p_grid, prob = posterior, size = 1e4, replace = T)
 
-# # 3E1
-# sum(samples < 0.2)/1e4
-# #3E2
-# sum(samples < 0.8)/1e4
-# #3E3
-# sum(samples > 0.2 & samples < 0.8)/1e4
-# #3E4
-# quantile(samples, 0.2)
-# #3E5
-# 1 - quantile(samples, 0.2)
-# #3E6
-# HPDI(samples, 0.66)
-# #3E7
-
+# 3E1
+sum(samples < 0.2)/1e4
+sum(posterior[p_grid < 0.2])
+#3E2
+sum(samples < 0.8)/1e4
+sum(posterior[p_grid < 0.8])
+#3E3
+sum(samples > 0.2 & samples < 0.8)/1e4
+sum(posterior[p_grid > 0.2 & p_grid < 0.8 ])
+#3E4
+quantile(samples, 0.2)
+#3E5
+1 - quantile(samples, 0.2)
+#3E6
+HPDI(samples, 0.66)
+#3E7
+PI(samples, 0.66)
 ### Medium
 #3M1
 likelihood.2 <- dbinom(8, 15, prob = p_grid)
@@ -98,7 +101,7 @@ HPDI(samples, 0.97)
 #3H3
 ppc.1 <- rbinom(trials, size = birth.total, prob = samples)
 dens(ppc.1)
-abline(v = 111)
+abline(v = boys.total)
 
 #3H4
 b1.boys <- sum(birth1)
@@ -106,11 +109,14 @@ b1.total <- length(birth1)
 ppc.2 <- rbinom(trials, size = b1.total, prob = samples)
 dens(ppc.2)
 abline(v = b1.boys)
-# The model does not fit the data very wellin this case
+# The model does not fit the data very well in this case
 
 #3H5
 b2.boys <- birth2[birth1 == 0]
 ppc.3 <- rbinom(trials, size = length(b2.boys), prob = samples)
 dens(ppc.3)
 abline(v = sum(b2.boys))
+# The model is underetimating the number of boys in second birth.
+# perhaps the assumption of sex independence between births is incorrect 
+# or it needs to be encoded into the model
 
